@@ -46,6 +46,9 @@ async def next_event(update: Update,context : ContextTypes.DEFAULT_TYPE):
     nextevent = extract_data(url)
     await context.bot.send_message(chat_id=update.effective_chat.id, text=nextevent)
 
+async def get_source(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=update.effective_chat.id, text='https://github.com/benrusza/gnulinuxvalenciabot')
+
 
 def main():
     application = ApplicationBuilder().token(API_TOKEN).build()
@@ -55,6 +58,9 @@ def main():
 
     next_event_handler = CommandHandler(['next_event','proximo_evento','proxim_event'],next_event)
     application.add_handler(next_event_handler)
+
+    get_source_handler = CommandHandler(['source','font'],get_source)
+    application.add_handler(get_source_handler)
 
     #echo_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, echo)
     #application.add_handler(echo_handler)
